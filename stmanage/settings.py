@@ -132,11 +132,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# EMAIL_BACKEND = 'djnago.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.hostinger.com'
-# EMAIL_PORT = 465
-# EMAIL_USER_SSL = True
-# EMAIL_USER_TLS = False
-# EMAIL_HOST_USER = 'alamocitypulse@alamocitypulse.com'
-# EMAIL_HOST_PASSWORD = 'alomacity124@A'
-# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
