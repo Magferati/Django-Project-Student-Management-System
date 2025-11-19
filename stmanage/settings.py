@@ -28,6 +28,12 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'authentications.CustomUser'
+from datetime import timedelta #for access token add more time
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=3600),   # এখানে সময় বাড়ান
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=10),
+}
 
 
 # Application definition
@@ -49,6 +55,12 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     #'drf_yasg',
 ]
+#django JWT for parmissiom class
+REST_FRAMEWORK = {
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework_simplejwt.authentication.JWTAuthentication',
+        ),
+    }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

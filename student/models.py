@@ -29,4 +29,4 @@ class Student(models.Model):
     )
 
     def __str__(self):
-        return self.user.email if self.user else "No User"
+        return self.user.first_name if self.user else "No User"

@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 #for course....................
 @api_view(["GET" , "POST"])
-#@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 
 def course_list(request):
     if request.method == "GET":
@@ -29,7 +29,7 @@ def course_list(request):
 
 #for subject...............
 @api_view(["GET" , "POST"])
-#@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 
 def subject_list(request):
     if request.method == "GET":
