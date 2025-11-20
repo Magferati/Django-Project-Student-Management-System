@@ -22,11 +22,11 @@ class Student(models.Model):
     )
     roll_no = models.CharField(max_length=6)
     course = models.ForeignKey(
-        "administration.Course",       
-        on_delete=models.RESTRICT,
-        blank=True,
-        null=True
-    )
+    "administration.Course",
+    on_delete=models.SET_NULL,
+    blank=True,
+    null=True
+)
 
     def __str__(self):
         return self.user.first_name if self.user else "No User"

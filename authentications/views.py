@@ -80,8 +80,6 @@ def register_user(request):
 
 
 
-
-
 @api_view(["POST"])
 def login(request):
     serializer = LoginSerializer(data=request.data)

@@ -34,6 +34,7 @@ class TeacherSerializer(serializers.ModelSerializer):
         designation = validated_data.pop('designation')
         course = validated_data.pop('course')
         password=generat_password()
+        print("password", password)
 
         
         user = User.objects.create_user(

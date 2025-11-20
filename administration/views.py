@@ -27,6 +27,34 @@ def course_list(request):
     return Response(serializer.errors, status=400)
 
 
+
+@api_view(["GET","PUT","DELETE"])
+@permission_classes([IsAuthenticated])
+def course_details(request,course_id):
+    try:
+        course = Course.objects.get(id=course_id)
+    except Exception as e:
+        return Response({"error":"course does not found"})
+
+    if request.method == "GET":
+        serializer = CourseSerializer(course)
+        return Response(serializer.data)
+    
+    
+    if request.method == "PUT":
+        serializer = CourseSerializer(course, data = request.data)
+        #(যখন PUT/PATCH করতে হবে কিন্তু সব ফিল্ড পাঠানো হবে না, তখন serializer errors দেবে।partial=True দিলে missing fields নিয়ে error দেবে না।
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+    
+    
+    if request.method == "DELETE":
+        course.delete()
+        return Response({"massage":"course deleted successfully"}, status=204)
+
+
+
 #for subject...............
 @api_view(["GET" , "POST"])
 @permission_classes([IsAuthenticated])
@@ -45,3 +73,28 @@ def subject_list(request):
             return Response(serializer.data, status=201)
 
     return Response(serializer.errors, status=400)
+
+@api_view(["GET","PUT","DELETE"])
+@permission_classes([IsAuthenticated])
+def subject_details(request,subject_id):
+    try:
+        subject = Subject.objects.get(id=subject_id)
+    except Exception as e:
+        return Response({"error":"subject does not found"})
+
+    if request.method == "GET":
+        serializer = SubjectSerializer(subject)
+        return Response(serializer.data)
+    
+    
+    if request.method == "PUT":
+        serializer = SubjectSerializer(subject, data = request.data)
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+    
+    
+    if request.method == "DELETE":
+        subject.delete()
+        return Response({"massage":"sunject deleted successfully"}, status=204)

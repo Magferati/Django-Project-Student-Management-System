@@ -34,3 +34,28 @@ def teacher_list(request):
             return Response(context, status=201)
 
     return Response(serializer.errors, status=400)
+
+@api_view(["GET","PUT","DELETE"])
+@permission_classes([IsAuthenticated])
+def teacher_details(request,teacher_id):
+    try:
+        teacher = Teacher.objects.get(id=teacher_id)
+    except Exception as e:
+        return Response({"error":"teacher id does not found"})
+
+    if request.method == "GET":
+        serializer = TeacherSerializer(teacher)
+        return Response(serializer.data)
+    
+    
+    if request.method == "PUT":
+        serializer = TeacherSerializer(teacher, data = request.data)
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+    
+    
+    if request.method == "DELETE":
+        teacher.delete()
+        return Response({"massage":"teacher deleted successfully"}, status=204)

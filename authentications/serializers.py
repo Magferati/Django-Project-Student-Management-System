@@ -8,19 +8,10 @@ User = get_user_model()
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
-    user_profile = serializers.SerializerMethodField()
-
     class Meta:
         model = User
-        fields = ['id', 'email', 'role', 'user_profile']
+        fields = ['id', 'email', 'role']
         read_only_fields = ['id', 'is_active', 'is_staff', 'is_superuser']
-
-    def get_user_profile(self, obj):
-        try:
-            profile = obj.user_profile
-            return UserGetProfileSerializer(profile).data
-        except UserProfile.DoesNotExist:
-            return None
 
 
 class CustomUserCreateSerializer(serializers.ModelSerializer):
@@ -54,6 +45,8 @@ class OTPSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'created_at', 'attempts']
 
 class UserProfileSerializer(serializers.ModelSerializer):
+
+    user = CustomUserSerializer(read_only = True)
    
 
     class Meta:

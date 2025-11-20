@@ -31,8 +31,8 @@ AUTH_USER_MODEL = 'authentications.CustomUser'
 from datetime import timedelta #for access token add more time
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=3600),   # এখানে সময় বাড়ান
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=10),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),   # এখানে সময় বাড়ান
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
 }
 
 
