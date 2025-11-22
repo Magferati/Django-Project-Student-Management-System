@@ -11,6 +11,6 @@ admin.site.register(UserProfile)
 
 @admin.register(OTP)
 class OTPAdmin(admin.ModelAdmin):
-    list_display = ('email','otp','create_at','attempts')
-    list_filter = ('create_at',)
+    list_display = ('email','otp','created_at','attempts')
+    list_filter = ('created_at',)
     search_fields = ('email','otp')

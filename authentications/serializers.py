@@ -46,7 +46,7 @@ class OTPSerializer(serializers.ModelSerializer):
 
 class UserProfileSerializer(serializers.ModelSerializer):
 
-    user = CustomUserSerializer(read_only = True)
+    user = CustomUserSerializer(read_only = True)   # for nested (show trecher email)
    
 
     class Meta:

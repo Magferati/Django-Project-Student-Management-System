@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your OTP Code</title>
+    <style>
+        body {
+            background-color: #f3efff;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            padding: 40px 0;
+            display: flex;
+            justify-content: center;
+        }
+        .card {
+            background: #ffffff;
+            width: 90%;
+            max-width: 550px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(77, 0, 153, 0.15);
+            padding: 35px;
+            text-align: center;
+            border-top: 6px solid #7b2cbf;
+        }
+        .header {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4b0082;
+            margin-bottom: 15px;
+        }
+        .message {
+            color: #444;
+            font-size: 15px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        .otp-box {
+            font-size: 36px;
+            font-weight: bold;
+            color: #7b2cbf;
+            background: #f2eaff;
+            padding: 18px 0;
+            border-radius: 10px;
+            letter-spacing: 10px;
+            margin: 25px 0;
+            border: 1px solid #d9c8ff;
+        }
+        .footer {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #777;
+        }
+        .footer strong {
+            color: #4b0082;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="header">Your OTP Code</div>
+
+        <div class="message">
+            Hello,<br>
+            Use the OTP code below to verify your identity and reset your password.<br>
+            This code is valid for <strong>5 minutes</strong>.
+        </div>
+
+        <div class="otp-box">{{ otp }}</div>
+
+        <div class="message">
+            If you didn’t request this password reset, you can safely ignore this email.
+        </div>
+
+        <div class="footer">
+            — <strong>Student Management System</strong> —<br>
+            Automated Mail • Do Not Reply
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

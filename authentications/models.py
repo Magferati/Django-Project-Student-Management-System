@@ -30,6 +30,7 @@ class CustomeUserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser,PermissionsMixin):
     ROLES = (
+        ('user', 'User'),
         ('admin', 'Admin'),
         ('student', 'Student'),
         ('teacher', 'Teacher'),
@@ -49,7 +50,7 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
 class OTP(models.Model) :
     email = models.EmailField()
     otp = models.CharField(max_length=6)
-    create_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     attempts = models.IntegerField(default=0)
 
     def __str__(self):
@@ -62,7 +63,7 @@ class OTP(models.Model) :
     
     def is_expired(self):
         from django.utils import timezone
-        return(timezone.now() - self.create_at).seconds>120
+        return(timezone.now() - self.created_at).seconds>120
 
 class UserProfile(models.Model):
     user = models.OneToOneField(

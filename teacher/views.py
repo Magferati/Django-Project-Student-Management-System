@@ -49,7 +49,7 @@ def teacher_details(request,teacher_id):
     
     
     if request.method == "PUT":
-        serializer = TeacherSerializer(teacher, data = request.data)
+        serializer = TeacherSerializer(teacher, data = request.data,partial=True)
         
         if serializer.is_valid():
             serializer.save()

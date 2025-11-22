@@ -1,11 +1,12 @@
 from rest_framework import serializers
 from .models import Teacher
 from django.contrib.auth import get_user_model
-from authentications.models import UserProfile
+from authentications.models import UserProfile, CustomUser
 from authentications.serializers import UserProfileSerializer
 from administration.serializers import CourseSerializer
 from administration.models import Course
 import random
+from authentications.views import send_mail
 
 User = get_user_model()
 
@@ -48,5 +49,40 @@ class TeacherSerializer(serializers.ModelSerializer):
             last_name =  last_name
         )
         teacher=Teacher.objects.create(user=profile, designation=designation,course=course)
+
+        send_mail(validated_data['email'],password)
         return teacher
 
+    def update(self, instance, validated_data):
+        # Update Teacher model fields
+        instance.designation = validated_data.get('designation', instance.designation)
+
+        # Update course if provided
+        course = validated_data.get('course', None)
+        if course:
+            instance.course = course
+
+        # Update UserProfile fields
+        profile = instance.user
+        profile.first_name = validated_data.get('first_name', profile.first_name)
+        profile.last_name = validated_data.get('last_name', profile.last_name)
+        profile.phone_number = validated_data.get('phone_number', profile.phone_number)
+
+        if 'profile_picture' in validated_data:
+            profile.profile_picture = validated_data['profile_picture']
+
+        profile.save()
+
+        # Update User model
+        user = profile.user
+        if 'email' in validated_data:
+            user.email = validated_data['email']
+        user.save()
+
+        instance.save()
+        return instance
+    
+    def validate_email(self, value):
+        if CustomUser.objects.filter(email=value).exists():
+            raise serializers.ValidationError("Email already exists")
+        return value

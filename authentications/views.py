@@ -27,18 +27,29 @@ def generate_otp():
 
 User = get_user_model()
 
-
+# it's for send otp
 def send_otp_email(email, otp):
     html_content = render_to_string('otp_email_template.html', {'otp': otp, 'email': email})
     msg = EmailMultiAlternatives(
         subject='Your OTP Code',
         body=f'Your OTP is {otp}',
-        from_email='Alomacitypulse <alamocitypulse@alamocitypulse.com>',
+        from_email='SKBN<zannatulmagferati@gmail.com>',
         to=[email]
     )
     msg.attach_alternative(html_content, "text/html")
     msg.send(fail_silently=False)
 
+# it's for send password
+def send_mail(email, password):
+    html_content = render_to_string('teacher-authentication.tamplate.html', {'password': password, 'email': email})
+    msg = EmailMultiAlternatives(
+        subject='Your Credentials',
+        body=f'Your Password is {password}',
+        from_email='SKBN<zannatulmagferati@gmail.com>',
+        to=[email]
+    )
+    msg.attach_alternative(html_content, "text/html")
+    msg.send(fail_silently=False)
 
 
 # ✅ Register user
@@ -88,7 +99,7 @@ def login(request):
         refresh = RefreshToken.for_user(user)
         
         # Choose profile based on role
-        if user.role in ['user', 'admin']:
+        if user.role in ['user', 'admin','teacher','student']:
             try:
                
                 profile = user.user_profile
