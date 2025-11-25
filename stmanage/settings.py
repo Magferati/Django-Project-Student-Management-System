@@ -55,10 +55,10 @@ INSTALLED_APPS = [
     'administration',
     'student',
     'teacher',
-    #'restapi',
     'rest_framework_simplejwt',
     'rest_framework_swagger',
-    #'drf_yasg',
+    'channels',
+    'chat'
 ]
 #django JWT for parmissiom class
 REST_FRAMEWORK = {
@@ -95,6 +95,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'stmanage.wsgi.application'
+ASGI_APPLICATION = 'stmanage.asgi.application'
 
 
 # Database
